@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova+SC:ital,wght@0,400;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  color: whitesmoke;
+  font-family: 'Bona Nova SC', serif;
+  background: linear-gradient(-45deg, #004024, #060c2d, #000000, #004050);
+  background-size: 400% 400%;
+  animation: gradient 30s ease infinite;
+  height: 100vh;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
