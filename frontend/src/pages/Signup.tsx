@@ -11,19 +11,20 @@ import {
 } from "../components/ui/card";
 import { MessageCircle, Eye, EyeOff } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
-    firstName: "",
+    name: "",
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
+  const auth=useAuth();
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     console.log("Signup attempt:", formData);
-    // Handle signup logic here
+    await auth?.signup(formData.name,formData.email,formData.password);
   };
 
   const handleInputChange =
@@ -56,17 +57,17 @@ const Signup = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <Label
-                  htmlFor="firstName"
+                  htmlFor="name"
                   className="text-sm font-medium text-gray-200"
                 >
                   First Name
                 </Label>
                 <Input
-                  id="firstName"
+                  id="name"
                   type="text"
                   placeholder="Enter first name"
-                  value={formData.firstName}
-                  onChange={handleInputChange("firstName")}
+                  value={formData.name}
+                  onChange={handleInputChange("name")}
                   className="bg-gray-700/50 border-gray-600 text-white placeholder-gray-400 focus:border-purple-500 focus:ring-purple-500"
                   required
                 />

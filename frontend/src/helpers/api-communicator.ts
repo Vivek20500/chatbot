@@ -9,3 +9,47 @@ export const loginUser = async (email: string, password: string) => {
     console.log('Login successful:', data);
     return data;
 };
+
+export const signupUser = async (name: string, email: string, password: string) => {
+  try {
+    const res = await axios.post("/users/signup", { name, email, password });
+    return res.data;
+  } catch (err: any) {
+    console.error("Signup error (full):", err.response?.data || err.message);
+    throw new Error(err.response?.data?.message || "Signup failed");
+  }
+};
+
+export const checkAuthStatus = async () => {
+    const res=await axios.get('/users/auth-status');
+    if (res.status !== 200) {
+        throw new Error('Unable to verify authentication status');
+    }
+    const data = res.data;
+    console.log('Authentication status:', data);
+    return data;
+};
+
+export const sendChatRequest = async (message:string) => {
+    const res=await axios.post('/chat/new',{message});
+    if (res.status !== 200) {
+        throw new Error('Unable to send messgaee');
+    }
+    const data = res.data;
+    console.log('Authentication status:', data);
+    return data;
+};
+
+export const logoutUser = async () => {
+  try {
+    const res = await axios.post("/users/logout", null, {
+      withCredentials: true, // important for cookie deletion
+    });
+
+    if (res.status !== 200) throw new Error("Logout failed");
+    console.log("Logout successful");
+  } catch (err: any) {
+    console.error("Logout error:", err.response?.data || err.message);
+    throw new Error(err.response?.data?.message || "Logout failed");
+  }
+};

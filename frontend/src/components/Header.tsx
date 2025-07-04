@@ -9,7 +9,7 @@ const Header = () => {
   return (
     <AppBar
       position="static"
-      sx={{ background: "transparent", boxShadow: "none" }}
+      sx={{ background: "transparent", boxShadow: "none"}}
     >
       <Toolbar
         sx={{

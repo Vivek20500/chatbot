@@ -1,4 +1,5 @@
 import {connect, disconnect} from 'mongoose';
+
 async function connectToDatabase(){
     try{
         await connect(process.env.MONGODB_URL);
@@ -6,6 +7,7 @@ async function connectToDatabase(){
         throw new Error(`Cnat connect to mongodbbb ${error}`);
     }
 }
+
 async function disconnectFromDatabase(){
     try{
         await disconnect();

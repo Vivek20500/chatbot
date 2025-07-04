@@ -19,6 +19,7 @@ export const getUsers = async (
         return res.status(200).json({message:"Error",cause:error.message});
     }
 }
+
 export const userSignup = async (
     req:Request,
     res:Response,
@@ -31,8 +32,6 @@ export const userSignup = async (
         if (existingUser) {
             return res.status(401).json({message:"User already exists"});
         }
-
-
         const hashedpassword = await hash(password, 10);
 
         const user = new User({name,email,password :hashedpassword});
@@ -58,7 +57,7 @@ export const userSignup = async (
         });
 
 
-        return res.status(201).json({message:"OK",id:user._id.toString(),name:user.name, email:user.email});
+        return res.status(201).json({message:"OK",name:user.name, email:user.email});
     } catch (error) {
         console.error("Error fetching users:", error);
         return res.status(200).json({message:"Error",cause:error.message});
@@ -102,10 +101,43 @@ export const userLogin = async (
             signed:true
         });
 
-        return res.status(200).json({message:"OK",id:user._id.toString(),name:user.name, email:user.email});
+        return res.status(200).json({message:"OK",name:user.name, email:user.email});
         
     } catch (error) {
         console.error("Error fetching users:", error);
         return res.status(200).json({message:"Error",cause:error.message});
     }
 }
+
+export const verifyUser = async (
+    req:Request,
+    res:Response,
+    next:NextFunction
+) => {
+    //user login
+    try {
+        
+        const user=await User.findOne({email:res.locals.jwtData.email});
+        if (!user) {
+            return res.status(401).json({message:"Token malfunctioned"});
+        }
+        if (user._id.toString() !== res.locals.jwtData.id) {
+            return res.status(401).json({message:"Token does not match user"});
+        }
+        
+        return res.status(200).json({message:"OK",name:user.name, email:user.email});
+        
+    } catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(200).json({message:"Error",cause:error.message});
+    }
+}
+
+export const logoutUser = (req, res) => {
+  res.clearCookie("auth_token", {
+    httpOnly: true,
+    secure: true,        // set to true if using HTTPS
+    sameSite: "strict",  // adjust if using cross-site frontend/backend
+  });
+  return res.status(200).json({ message: "Logged out and cookie cleared" });
+};
