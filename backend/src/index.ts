@@ -1,5 +1,13 @@
 import app from "./app.js";
 import { connectToDatabase } from "./db/connection.js";
+import cors from 'cors';
+
+const allowedOrigins = [`${process.env.FRONTEND_URL}`];
+
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true, // if you're using cookies or Authorization headers
+}));
 
 connectToDatabase()
   .then(() => {
