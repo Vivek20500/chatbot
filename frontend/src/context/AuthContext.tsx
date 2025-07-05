@@ -71,15 +71,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   };
 
   const logout = async () => {
-    try {
-      await logoutUser(); // ✅ backend call to clear cookie
-    } catch (err) {
-      console.error("Logout failed, but clearing state anyway.");
-    } finally {
-      setUser(null);
+      await logoutUser();
       setIsLoggedIn(false);
-    }
-  };
+      setUser(null);
+      window.location.reload();
+    };
 
   const value = {
     user,

@@ -53,9 +53,7 @@ export const getUserChats = async () => {
 
 export const logoutUser = async () => {
   try {
-    const res = await axios.post("/users/logout", null, {
-      withCredentials: true, // important for cookie deletion
-    });
+    const res = await axios.get("/users/logout");
 
     if (res.status !== 200) throw new Error("Logout failed");
     console.log("Logout successful");

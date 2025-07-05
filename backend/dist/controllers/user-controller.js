@@ -101,4 +101,27 @@ export const verifyUser = async (req, res, next) => {
         return res.status(200).json({ message: "Error", cause: error.message });
     }
 };
+export const userLogout = async (req, res, next) => {
+    //user login
+    try {
+        const user = await User.findOne({ email: res.locals.jwtData.email });
+        if (!user) {
+            return res.status(401).json({ message: "Token malfunctioned" });
+        }
+        if (user._id.toString() !== res.locals.jwtData.id) {
+            return res.status(401).json({ message: "Token does not match user" });
+        }
+        res.clearCookie(COOKIE_NAME, {
+            path: "/",
+            domain: "localhost",
+            httpOnly: true,
+            signed: true
+        });
+        return res.status(200).json({ message: "OK", name: user.name, email: user.email });
+    }
+    catch (error) {
+        console.error("Error fetching users:", error);
+        return res.status(200).json({ message: "Error", cause: error.message });
+    }
+};
 //# sourceMappingURL=user-controller.js.map

@@ -9,7 +9,7 @@ type Props={
 }
 const NavigationLink = (props:Props) => {
   return (
-    <Link className="font-bold mx-5 px-2.5 py-2 rounded-md hover:shadow-md hover:shadow-teal-900" to={props.to} style={{background:props.bg,color:props.textColor}}>
+    <Link onClick={props.onClick} className="font-bold mx-5 px-2.5 py-2 rounded-md hover:shadow-md hover:shadow-teal-900" to={props.to} style={{background:props.bg,color:props.textColor}}>
         {props.text}
     </Link>
   )

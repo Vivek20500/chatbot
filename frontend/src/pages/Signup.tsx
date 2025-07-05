@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
@@ -10,10 +10,11 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { MessageCircle, Eye, EyeOff } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 const Signup = () => {
+  const navigate=useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,6 +33,13 @@ const Signup = () => {
     (e: React.ChangeEvent<HTMLInputElement>) => {
       setFormData((prev) => ({ ...prev, [field]: e.target.value }));
     };
+
+    useEffect(()=>{
+        if(auth?.user){
+          return navigate("/chat");
+        }
+      },[auth]);
+    
 
   return (
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">

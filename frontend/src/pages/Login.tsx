@@ -1,16 +1,17 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
 import { Label } from "../components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../components/ui/card";
-import { MessageCircle, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {toast} from "react-hot-toast"
 import { useAuth } from "../context/AuthContext";
 
 const Login = () => {
+  const navigate=useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -28,6 +29,12 @@ const Login = () => {
     }
 
   };
+  useEffect(()=>{
+    if(auth?.user){
+      return navigate("/chat");
+    }
+  },[auth]);
+
   return (
     
     <div className="min-h-screen relative overflow-hidden flex items-center justify-center">
