@@ -33,6 +33,3 @@ A full-stack, real-time chatbot application using the **Google Gemini API** as a
 - cookie-parser, cors, dotenv, morgan
 
 ---
-
-## 📁 Folder Structure
-
