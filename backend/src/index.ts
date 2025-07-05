@@ -5,7 +5,9 @@ import cors from 'cors';
 const allowedOrigins = [`${process.env.FRONTEND_URL}`];
 
 app.use(cors({
-  origin: '*', // not recommended for production
+  origin: '*', 
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true,
 }));
 
 connectToDatabase()
