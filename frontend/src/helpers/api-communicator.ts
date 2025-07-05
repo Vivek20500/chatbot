@@ -40,6 +40,17 @@ export const sendChatRequest = async (message:string) => {
     return data;
 };
 
+export const getUserChats = async () => {
+  try {
+    const res = await axios.get("/chat/all-chats", { withCredentials: true });
+    return res.data; 
+  } catch (err: any) {
+    console.error("Error loading chats:", err.response?.data || err.message);
+    throw new Error(err.response?.data?.message || "Failed to load chats");
+  }
+};
+
+
 export const logoutUser = async () => {
   try {
     const res = await axios.post("/users/logout", null, {

@@ -1,12 +1,14 @@
 import { Box } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 import ChatItem from "../components/chat/ChatItem";
 import MessageInput from "../components/ui/messageInput";
-import { sendChatRequest } from "../helpers/api-communicator"; // Adjust the path
+import { getUserChats, sendChatRequest } from "../helpers/api-communicator"; // Adjust the path
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 const Chat = () => {
   const inputRef = useRef<HTMLInputElement | null>(null);
-
+  const auth = useAuth();
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -21,10 +23,7 @@ const Chat = () => {
       const data = await sendChatRequest(text);
       const reply = data.reply || "No response from server";
 
-      setMessages((prev) => [
-        ...prev,
-        { role: "assistant", content: reply },
-      ]);
+      setMessages((prev) => [...prev, { role: "assistant", content: reply }]);
     } catch (error) {
       console.error("Error sending chat:", error);
       setMessages((prev) => [
@@ -33,6 +32,32 @@ const Chat = () => {
       ]);
     }
   };
+ useLayoutEffect(() => {
+  if (!auth?.isLoggedIn || !auth.user) return;
+
+  toast.loading("Loading Chats", { id: "loadchats" });
+
+  getUserChats()
+    .then((data) => {
+      if (Array.isArray(data.chats)) {
+        // Normalize roles (model -> assistant)
+        const normalizedChats = data.chats.map((chat) => ({
+          ...chat,
+          role: chat.role === "model" ? "assistant" : chat.role,
+        }));
+
+        setMessages(normalizedChats);
+        toast.success("Successfully loaded chats", { id: "loadchats" });
+      } else {
+        toast.error("Invalid chat format", { id: "loadchats" });
+      }
+    })
+    .catch((err) => {
+      console.error("Error loading chats:", err);
+      toast.error("Failed to load chats", { id: "loadchats" });
+    });
+}, [auth?.isLoggedIn, auth?.user]);
+
 
   return (
     <Box

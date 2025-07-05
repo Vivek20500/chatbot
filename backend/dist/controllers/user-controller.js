@@ -101,12 +101,4 @@ export const verifyUser = async (req, res, next) => {
         return res.status(200).json({ message: "Error", cause: error.message });
     }
 };
-export const logoutUser = (req, res) => {
-    res.clearCookie("auth_token", {
-        httpOnly: true,
-        secure: true, // set to true if using HTTPS
-        sameSite: "strict", // adjust if using cross-site frontend/backend
-    });
-    return res.status(200).json({ message: "Logged out and cookie cleared" });
-};
 //# sourceMappingURL=user-controller.js.map
