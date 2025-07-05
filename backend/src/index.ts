@@ -3,12 +3,15 @@ import { connectToDatabase } from "./db/connection.js";
 import cors from 'cors';
 
 const allowedOrigins = [`${process.env.FRONTEND_URL}`];
-
 app.use(cors({
-  origin: '*', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  origin: allowedOrigins,
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
+// ✅ Optional: Allow preflight requests
+app.options("*", cors());
 
 connectToDatabase()
   .then(() => {
