@@ -33,3 +33,8 @@ A full-stack, real-time chatbot application using the **Google Gemini API** as a
 - cookie-parser, cors, dotenv, morgan
 
 ---
+
+## Demo Video
+## 🎥 Demo
+
+[Watch Video on Google Drive](https://drive.google.com/file/d/13sgH1I_YXbIZJCt6LTSy96i5tHXi_nqE/view?usp=sharing)
