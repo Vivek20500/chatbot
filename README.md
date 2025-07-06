@@ -34,7 +34,6 @@ A full-stack, real-time chatbot application using the **Google Gemini API** as a
 
 ---
 
-## Demo Video
-## 🎥 Demo
+## 🎥 Demo Video
 
 [Watch Video on Google Drive](https://drive.google.com/file/d/13sgH1I_YXbIZJCt6LTSy96i5tHXi_nqE/view?usp=sharing)
