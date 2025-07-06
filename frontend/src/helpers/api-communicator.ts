@@ -31,7 +31,7 @@ export const signupUser = async (name: string, email: string, password: string) 
 // };
 export const checkAuthStatus = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_API_URL}/api/v1/users/auth-status`,
+    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/auth-status`,
     { withCredentials: true } // ✅ send cookies
   );
 
