@@ -20,15 +20,29 @@ export const signupUser = async (name: string, email: string, password: string) 
   }
 };
 
+// export const checkAuthStatus = async () => {
+//     const res=await axios.get('/users/auth-status');
+//     if (res.status !== 200) {
+//         throw new Error('Unable to verify authentication status');
+//     }
+//     const data = res.data;
+//     console.log('Authentication status:', data);
+//     return data;
+// };
 export const checkAuthStatus = async () => {
-    const res=await axios.get('/users/auth-status');
-    if (res.status !== 200) {
-        throw new Error('Unable to verify authentication status');
-    }
-    const data = res.data;
-    console.log('Authentication status:', data);
-    return data;
+  const res = await axios.get(
+    `${import.meta.env.VITE_API_URL}/api/v1/users/auth-status`,
+    { withCredentials: true } // ✅ send cookies
+  );
+
+  if (res.status !== 200) {
+    throw new Error('Unable to verify authentication status');
+  }
+
+  console.log('Authentication status:', res.data);
+  return res.data;
 };
+
 
 export const sendChatRequest = async (message:string) => {
     const res=await axios.post('/chat/new',{message});
