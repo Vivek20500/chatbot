@@ -4,6 +4,12 @@ A full-stack, real-time chatbot application using the **Google Gemini API** as a
 
 ---
 
+## 🎥 Demo Video
+
+[Watch Video on Google Drive](https://drive.google.com/file/d/13sgH1I_YXbIZJCt6LTSy96i5tHXi_nqE/view?usp=sharing)
+
+---
+
 ## 🚀 Features
 
 - 🔐 User Authentication (Sign Up / Login)
@@ -32,4 +38,3 @@ A full-stack, real-time chatbot application using the **Google Gemini API** as a
 - bcrypt for password hashing
 - cookie-parser, cors, dotenv, morgan
 
----
