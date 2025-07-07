@@ -24,7 +24,7 @@ const Signup = () => {
   const auth=useAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Signup attempt:", formData);
+    // console.log("Signup attempt:", formData);
     await auth?.signup(formData.name,formData.email,formData.password);
   };
 

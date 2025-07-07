@@ -25,7 +25,6 @@ export const loginUser = async (email: string, password: string) => {
         throw new Error('Login failed');
     }
     const data = res.data;
-    console.log('Login successful:', data);
     return data;
 };
 
@@ -50,7 +49,6 @@ export const checkAuthStatus = async () => {
     throw new Error('Unable to verify authentication status');
   }
 
-  console.log('Authentication status:', res.data);
   return res.data;
 };
 
@@ -62,7 +60,6 @@ export const sendChatRequest = async (message:string) => {
         throw new Error('Unable to send messgaee');
     }
     const data = res.data;
-    console.log('Authentication status:', data);
     return data;
 };
 
@@ -82,7 +79,6 @@ export const logoutUser = async () => {
     const res = await axios.get("/users/logout");
 
     if (res.status !== 200) throw new Error("Logout failed");
-    console.log("Logout successful");
   } catch (err: any) {
     console.error("Logout error:", err.response?.data || err.message);
     throw new Error(err.response?.data?.message || "Logout failed");
