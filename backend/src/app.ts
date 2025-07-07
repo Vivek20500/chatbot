@@ -8,10 +8,12 @@ import cors from "cors";
 config();
 
 const app=express();
-const allowedOrigins = process.env.FRONTEND_URL;
-
-app.use(cors({origin: allowedOrigins, 
-  credentials: true,}));
+const corsOptions = {
+  origin: "https://chatbotbyvivek.vercel.app",
+  credentials: true,
+};
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
