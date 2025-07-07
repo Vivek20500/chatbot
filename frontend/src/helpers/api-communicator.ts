@@ -1,7 +1,25 @@
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1`,
+  withCredentials: true,
+  timeout: 10000,
+  headers: {
+    'Content-Type': 'application/json',
+  }
+});
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    console.error('API Error:', error.response?.data || error.message);
+    return Promise.reject(error);
+  }
+);
+
+
 export const loginUser = async (email: string, password: string) => {
-    const res=await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/users/login`,{email, password},
+    const res=await axios.post(`/users/login`,{email, password},
     { withCredentials: true } );
     if (res.status !== 200) {
         throw new Error('Login failed');
@@ -22,18 +40,9 @@ export const signupUser = async (name: string, email: string, password: string) 
   }
 };
 
-// export const checkAuthStatus = async () => {
-//     const res=await axios.get('/users/auth-status');
-//     if (res.status !== 200) {
-//         throw new Error('Unable to verify authentication status');
-//     }
-//     const data = res.data;
-//     console.log('Authentication status:', data);
-//     return data;
-// };
 export const checkAuthStatus = async () => {
   const res = await axios.get(
-    `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/users/auth-status`,
+    `/api/v1/users/auth-status`,
     { withCredentials: true } // ✅ send cookies
   );
 
