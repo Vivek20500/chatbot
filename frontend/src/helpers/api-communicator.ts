@@ -1,7 +1,8 @@
 import axios from "axios";
 
 export const loginUser = async (email: string, password: string) => {
-    const res=await axios.post('/users/login',{email, password});
+    const res=await axios.post('/users/login',{email, password},
+    { withCredentials: true } );
     if (res.status !== 200) {
         throw new Error('Login failed');
     }
@@ -12,7 +13,8 @@ export const loginUser = async (email: string, password: string) => {
 
 export const signupUser = async (name: string, email: string, password: string) => {
   try {
-    const res = await axios.post("/users/signup", { name, email, password });
+    const res = await axios.post("/users/signup", { name, email, password },
+    { withCredentials: true } );
     return res.data;
   } catch (err: any) {
     console.error("Signup error (full):", err.response?.data || err.message);
@@ -45,7 +47,8 @@ export const checkAuthStatus = async () => {
 
 
 export const sendChatRequest = async (message:string) => {
-    const res=await axios.post('/chat/new',{message});
+    const res=await axios.post('/chat/new',{message},
+    { withCredentials: true } );
     if (res.status !== 200) {
         throw new Error('Unable to send messgaee');
     }
