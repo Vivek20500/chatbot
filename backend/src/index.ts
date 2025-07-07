@@ -1,9 +1,5 @@
 import app from "./app.js";
 import { connectToDatabase } from "./db/connection.js";
-import cors from 'cors';
-
-app.use(cors({ origin: "https://chatbotbyvivek.vercel.app", credentials: true }));
-
 
 
 connectToDatabase()
