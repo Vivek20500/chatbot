@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const loginUser = async (email: string, password: string) => {
-    const res=await axios.post('/users/login',{email, password},
+    const res=await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/users/login`,{email, password},
     { withCredentials: true } );
     if (res.status !== 200) {
         throw new Error('Login failed');

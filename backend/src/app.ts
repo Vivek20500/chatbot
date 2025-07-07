@@ -13,7 +13,7 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
-app.options("https://chatbotbyvivek.vercel.app", cors(corsOptions)); 
+app.options("*", cors(corsOptions)); 
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
