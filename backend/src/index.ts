@@ -5,7 +5,7 @@ import cors from 'cors';
 app.use(cors({ origin: "https://chatbotbyvivek.vercel.app", credentials: true }));
 
 // Preflight support
-app.options('*', cors());
+app.options('*', cors({ origin: "https://chatbotbyvivek.vercel.app", credentials: true }));
 
 connectToDatabase()
   .then(() => {
