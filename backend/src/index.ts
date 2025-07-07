@@ -2,13 +2,7 @@ import app from "./app.js";
 import { connectToDatabase } from "./db/connection.js";
 import cors from 'cors';
 
-const allowedOrigins = [`${process.env.FRONTEND_URL}`];
-app.use(cors({
-  origin: `${allowedOrigins}`, // ✅ frontend domain only
-  credentials: true,                            // ✅ allow cookies
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
-}));
+app.use(cors({ origin: "https://chatbotbyvivek.vercel.app", credentials: true }));
 
 // Preflight support
 app.options('*', cors());
