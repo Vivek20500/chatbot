@@ -42,7 +42,7 @@ export const signupUser = async (name: string, email: string, password: string) 
 
 export const checkAuthStatus = async () => {
   const res = await axios.get(
-    `/api/v1/users/auth-status`,
+    `/users/auth-status`,
     { withCredentials: true } // ✅ send cookies
   );
 
